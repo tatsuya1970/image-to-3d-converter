@@ -2,6 +2,8 @@
 
 This project provides a web-based application that converts the dark areas of an uploaded image into a 3D mesh and provides the output as both OBJ and FBX files.
 
+![スクリーンショット 2025-07-06 175145](https://github.com/user-attachments/assets/6e8d8479-7b34-4b5a-8be0-c3af069498f5)
+
 ## Prerequisites
 
 - Python 3.7+
