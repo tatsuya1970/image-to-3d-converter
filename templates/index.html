@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image to 3D Mesh</title>
+</head>
+<body>
+    <h1>Upload Image to Generate 3D Mesh</h1>
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit">
+    </form>
+    <div id="result"></div>
+    <script>
+        const form = document.querySelector('form');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            resultDiv.innerHTML = 'Processing... Please wait.';
+
+            const response = await fetch('/upload/', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.error) {
+                    resultDiv.innerHTML = `Error: ${data.error}`;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p>Processing complete!</p>
+                        <a href="${data.obj_url}" download>Download OBJ</a><br>
+                        <a href="${data.fbx_url}" download>Download FBX</a>
+                    `;
+                }
+            } else {
+                resultDiv.innerHTML = 'An error occurred during upload.';
+            }
+        });
+    </script>
+</body>
+</html>
